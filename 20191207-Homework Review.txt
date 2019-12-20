@@ -1,0 +1,6 @@
+
+
+Consider the DOM elements and the words assigned to each
+
+Areas
+Actions

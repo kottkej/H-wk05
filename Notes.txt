@@ -1,0 +1,20 @@
+
+ECMA Script 6
+
+DOM Manipulation through JQuery
+
+JQuery - 
+CDN - Content Delivery Network
+<script src.... see the bootstrap example>
+
+jQuery specific selector ($) such as
+	$("#clickMe")
+
+See example below
+
+$(element).on("click, function(){
+alert("wording
+
+first position   - index
+second position  - value
+
