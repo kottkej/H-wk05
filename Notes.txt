@@ -18,3 +18,46 @@ alert("wording
 first position   - index
 second position  - value
 
+//$( '#calendar').append(
+'<li class=" col-sm-12 col-md-12 col-lg-12 list-group-item' + bgClass +'"
+ id="time-slot-' + index + '">'
+ + item +
+': 
+<input type="text" class=" col-sm-8 col-md-8 col-lg-9" id="input"></input>
+<button type="button" class="btn col-sm-2 col-md-2 col-lg-1 ml-1 btn-dark">Save</button></li>' );
+
+---------------
+<input type="text" name="date" id="date" value="Thu, 04 Mar 2016 11:14:15 +0000" placeholder="yyyy-mm-dd">
+<button class="compare">Compare date to current date</button>
+<br>
+<div class="result"></div>
+<div class="result2"></div>
+$(document).ready(function() {
+
+  var compareTo = "Thu, 03 Mar 2016 21:18:39 +0000";
+
+  $('.compare').click(function(e) {
+
+    var date = $('#date').val();
+
+    /*********************/
+    var isAfter = moment(date).isAfter(compareTo);
+    console.log(isAfter);
+    $('.result2').text('Date is After: ' + isAfter);
+
+    /*********************/
+
+    var now = moment();
+    var then = moment(date);
+
+    if (compareTo > then) {
+      $('.result').text('Date is past');
+    } else {
+      $('.result').text('Date is future');
+    }
+
+  });
+
+});
+
+

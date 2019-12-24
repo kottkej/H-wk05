@@ -1,10 +1,37 @@
-let cdt = moment().format('MMMM Do YYYY, h:mm:ss a');
-const cdt = $("<p>").text("Today is " + cdt);
-/*let currentTime = moment().format()*/
+/*Getting current datetimestamp and passing it to the 
+the currentDay field*/
+    var cdt = moment().format("MM/DD/YYYY");
+    var pcdt = document.getElementById('currentDay');
+    pcdt.textContent = cdt;
 
-const calendarDiv = $('<div>');
-//console.log(currentDate);
-let timeSlots = JSON.parse(localStorage.getItem('timepart')) || [];
+/*Appending index.html page time slots for time, user input field, and save button*/
+    var ts = [9,10,11,12,13,14,15,16,17]
+
+    for (let i=0; i<ts.length; i++){
+
+        $('#calendar').append(
+        '<li id=TS' + ts[i] + '">' 
+        + moment().hour(ts[i]).minute(0).second(0).format('hh mm A') + 
+        '<input type="text" id=txt' + ts[i] + '></input><button type="button">Save</button></li>')
+    }
+
+/*Pulling and storing user input with local storage*/
+
+/*     function storeScore(){
+        let initials = document.getElementById("initials").value;
+        localStorage.setItem("initials",quizTime);
+        const score = {
+            initials: initials,
+            yourscore: quizTime,
+          };
+        scores.push(score);
+        localStorage.setItem("highscores", JSON.stringify(scores));
+        scoreDiv.style.display = "none";
+        start.style.display = "block";
+        timespan.innerHTML = initialQuizTime;
+    } */
+
+
 
 
 /*   Psuedo coding
