@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>jQuery Get ID of an Element</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+    div{
+        padding: 20px;
+        background: #abb1b8;
+    }
+</style>
+<script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        var elmId = $("#test").attr("id");
+        alert(elmId);
+    });
+});
+</script>
+</head>
+<body>
+    <div id="test">#text</div>
+    <br>
+    <button type="button" id="myBtn">Show Div ID</button>
+</body>
+</html>

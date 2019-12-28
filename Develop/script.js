@@ -3,17 +3,18 @@ the currentDay field*/
     var cdt = moment().format("MM/DD/YYYY");
     var pcdt = document.getElementById('currentDay');
     pcdt.textContent = cdt;
+    var x = moment().format("hh:mm A");
 
 /*Appending index.html page time slots for time, user input field, and save button*/
-    var ts = [9, 10, 11, 12, 13, 14, 15, 16, 17]
+    var ts = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
     for (let i = 0; i < ts.length; i++) {
 
-        $('#calendar').append(
-            '<li id=TS' + ts[i] + '">'
-            + moment().hour(ts[i]).minute(0).second(0).format('hh mm A') +
-            '<input type="text" id=txt' + ts[i] + ' class="flush"></input><button type="button" id=btn'
-            + ts[i] + ' onclick="ftxt'+ts[i]+'()">Save</button></li>')
+    $('#calendar').append(
+        '<li col-sm-12 col-md-12 col-lg-12 class = "row" id=TS' + ts[i] + '">'
+        + moment().hour(ts[i]).minute(0).second(0).format('hh mm A') +
+        '<input type="text" id=txt' + ts[i] + ' col-sm-8 col-md-8 col-lg-9 class="flush"></input><button type="button" col-sm-2 col-md2 col-lg-1 ml-1 btn-dark id=btn'
+        + ts[i] + ' class="saveBtn">Save</button></li>')
     }
 //Color coding past, present, future
     const listItems = document.getElementsByTagName("li");
@@ -24,13 +25,10 @@ the currentDay field*/
     }
     });
 
-    console.log(listItems);
-
     var m = parseInt(moment().format('k'));
-    console.log(m);
 
     /// this is not working... need to find out how to loop and perform if/else
-    $(document).ready(function() {
+/*     $(document).ready(function() {
         for (let i=0; i < listItems.length; i++){
             y = (parseInt(listItems[i].value));
             if (y < m) {
@@ -66,74 +64,234 @@ the currentDay field*/
                 document.getElementsByTagName("li")[8].setAttribute("class", "future");
             }
         }
-    });
-
-// evaluating cde for potential use in evaluting time conditions
-/* var time = moment('09:34:00',format),
-  beforeTime = moment('08:34:00', format),
-  afterTime = moment('10:34:00', format);
-
-if (time.isBetween(beforeTime, afterTime)) {
-
-  console.log('is between')
-
-} else {
-
-  console.log('is not between')
-
-} */
-
-//Code evaluation
-/*$(".saver").click(function() {
-    $('input[type="text"]').each(function() {
-        const id = $(this).attr('id');
-        const value = $(this).val();
-        localStorage.setItem(id, value);
-        const getter = localStorage.getItem(id);
-        });
-    });
-
-*/
-
-
+    }); */
 
 /*Pulling and storing user input with local storage*/
- 
- /*    let text9 = JSON.parse(localStorage.getItem('txt9')) || []; 
-    console.log(text9);    
+//Timeslot 9
+    $(document).ready(function() {
 
-    function ftxt9(){
-        let data9 = document.getElementById("txt9").value;
-        console.log(data9);
-        const score = {
-            one: data9,
-            timestamp: moment().format("LLL")
-        }
-        text9.push(score);
-        localStorage.setItem("txt9", JSON.stringify(text9));
+        const litxt9 = document.querySelector("#txt9");
+        const btn9Button = document.querySelector("#btn9");
 
-        }
-    let new9 = localStorage.getItem('txt9');
-        console.log(new9);  
+    btn9Button.addEventListener("click", function(event) {
+        event.preventDefault();  
+        //set array
+        const lcl9 = {
+            txt9: litxt9.value.trim(),
+            txt9time: x,
+        };
+        // set new submission
+        console.log(lcl9);
+        localStorage.setItem("lcl9", JSON.stringify(lcl9));
+    });
+        // get most recent submission
+        const lastlcl9 = JSON.parse(localStorage.getItem("lcl9"));
+        document.getElementById("txt9").value = lastlcl9.txt9;
+        console.log(lastlcl9);
+    });
+//Timeslot 10
+    $(document).ready(function() {
 
-    txt9.textContent = new9;
-    txt10.textContent = "textbox10";
-    document.getElementById('txt11').setAttribute("funny", "100");
-    console.log(txt9);
-    console.log(txt10); */
+        const litxt10 = document.querySelector("#txt10");
+        const btn10Button = document.querySelector("#btn10");
 
-document.getElementById("txt9").value = "Johnny Bravo";
+    btn10Button.addEventListener("click", function(event) {
+        event.preventDefault();  
+        //set array
+        const lcl10 = {
+            txt10: litxt10.value.trim(),
+            txt10time: x,
+        };
+        // set new submission
+        console.log(lcl10);
+        localStorage.setItem("lcl10", JSON.stringify(lcl10));
+    });
+        // get most recent submission
+        const lastlcl10 = JSON.parse(localStorage.getItem("lcl10"));
+        document.getElementById("txt10").value = lastlcl10.txt10;
+        console.log(lastlcl10);
+    });
+//Timeslot 11
+    $(document).ready(function() {
 
+        const litxt11 = document.querySelector("#txt11");
+        const btn11Button = document.querySelector("#btn11");
+
+    btn11Button.addEventListener("click", function(event) {
+        event.preventDefault();  
+        //set array
+        const lcl11 = {
+            txt11: litxt11.value.trim(),
+            txt11time: x,
+        };
+        // set new submission
+        console.log(lcl11);
+        localStorage.setItem("lcl11", JSON.stringify(lcl11));
+    });
+        // get most recent submission
+        const lastlcl11 = JSON.parse(localStorage.getItem("lcl11"));
+        document.getElementById("txt11").value = lastlcl11.txt11;
+        console.log(lastlcl11);
+    });
+//Timeslot 12
+$(document).ready(function() {
+
+    const litxt12 = document.querySelector("#txt12");
+    const btn12Button = document.querySelector("#btn12");
+
+btn12Button.addEventListener("click", function(event) {
+    event.preventDefault();  
+    //set array
+    const lcl12 = {
+        txt12: litxt12.value.trim(),
+        txt12time: x,
+    };
+    // set new submission
+    console.log(lcl12);
+    localStorage.setItem("lcl12", JSON.stringify(lcl12));
+});
+    // get most recent submission
+    const lastlcl12 = JSON.parse(localStorage.getItem("lcl12"));
+    document.getElementById("txt12").value = lastlcl12.txt12;
+    console.log(lastlcl12);
+});
+//Timeslot 13
+$(document).ready(function() {
+
+    const litxt13 = document.querySelector("#txt13");
+    const btn13Button = document.querySelector("#btn13");
+
+btn13Button.addEventListener("click", function(event) {
+    event.preventDefault();  
+    //set array
+    const lcl13 = {
+        txt13: litxt13.value.trim(),
+        txt13time: x,
+    };
+    // set new submission
+    console.log(lcl13);
+    localStorage.setItem("lcl13", JSON.stringify(lcl13));
+});
+    // get most recent submission
+    const lastlcl13 = JSON.parse(localStorage.getItem("lcl13"));
+    document.getElementById("txt13").value = lastlcl13.txt13;
+    console.log(lastlcl13);
+});
+//Timeslot 14
+$(document).ready(function() {
+
+    const litxt14 = document.querySelector("#txt14");
+    const btn14Button = document.querySelector("#btn14");
+
+btn14Button.addEventListener("click", function(event) {
+    event.preventDefault();  
+    //set array
+    const lcl14 = {
+        txt14: litxt14.value.trim(),
+        txt14time: x,
+    };
+    // set new submission
+    console.log(lcl14);
+    localStorage.setItem("lcl14", JSON.stringify(lcl14));
+});
+    // get most recent submission
+    const lastlcl14 = JSON.parse(localStorage.getItem("lcl14"));
+    document.getElementById("txt14").value = lastlcl14.txt14;
+    console.log(lastlcl14);
+});
+//Timeslot 11
+$(document).ready(function() {
+
+    const litxt11 = document.querySelector("#txt11");
+    const btn11Button = document.querySelector("#btn11");
+
+btn11Button.addEventListener("click", function(event) {
+    event.preventDefault();  
+    //set array
+    const lcl11 = {
+        txt11: litxt11.value.trim(),
+        txt11time: x,
+    };
+    // set new submission
+    console.log(lcl11);
+    localStorage.setItem("lcl11", JSON.stringify(lcl11));
+});
+    // get most recent submission
+    const lastlcl11 = JSON.parse(localStorage.getItem("lcl11"));
+    document.getElementById("txt11").value = lastlcl11.txt11;
+    console.log(lastlcl11);
+});
+//Timeslot 15
+$(document).ready(function() {
+
+    const litxt15 = document.querySelector("#txt15");
+    const btn15Button = document.querySelector("#btn15");
+
+btn15Button.addEventListener("click", function(event) {
+    event.preventDefault();  
+    //set array
+    const lcl15 = {
+        txt15: litxt15.value.trim(),
+        txt15time: x,
+    };
+    // set new submission
+    console.log(lcl15);
+    localStorage.setItem("lcl15", JSON.stringify(lcl15));
+});
+    // get most recent submission
+    const lastlcl15 = JSON.parse(localStorage.getItem("lcl15"));
+    document.getElementById("txt15").value = lastlcl15.txt15;
+    console.log(lastlcl15);
+});
+//Timeslot 16
+$(document).ready(function() {
+
+    const litxt16 = document.querySelector("#txt16");
+    const btn16Button = document.querySelector("#btn16");
+
+btn16Button.addEventListener("click", function(event) {
+    event.preventDefault();  
+    //set array
+    const lcl16 = {
+        txt16: litxt16.value.trim(),
+        txt16time: x,
+    };
+    // set new submission
+    console.log(lcl16);
+    localStorage.setItem("lcl16", JSON.stringify(lcl16));
+});
+    // get most recent submission
+    const lastlcl16 = JSON.parse(localStorage.getItem("lcl16"));
+    document.getElementById("txt16").value = lastlcl16.txt16;
+    console.log(lastlcl16);
+});
+//Timeslot 17
+$(document).ready(function() {
+
+    const litxt17 = document.querySelector("#txt17");
+    const btn17Button = document.querySelector("#btn17");
+
+btn17Button.addEventListener("click", function(event) {
+    event.preventDefault();  
+    //set array
+    const lcl17 = {
+        txt17: litxt17.value.trim(),
+        txt17time: x,
+    };
+    // set new submission
+    console.log(lcl17);
+    localStorage.setItem("lcl17", JSON.stringify(lcl17));
+});
+    // get most recent submission
+    const lastlcl17 = JSON.parse(localStorage.getItem("lcl17"));
+    document.getElementById("txt17").value = lastlcl17.txt17;
+    console.log(lastlcl17);
+});
 /*Psuedo coding
-    2 - Prep a function to continuously update that datetimestamp
-    2a - Pull from local storage
     3 - set the color of the class
 
 /* Create a simple calendar application that allows the user to save events for each hour of the day. 
 This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
 
-Clicking on the save button will store the time and user input in `localStorage`.
-
-Near the top of the calendar, the application should display the current day. 
 Additionally, each hour should be color coded to reflect whether the time slot 
 is in the past, the present, or the future. This will change depending on the time of day. */

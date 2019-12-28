@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>jQuery Get ID of Multiple Elements</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<style>
+    div{
+        padding: 20px;
+        margin-bottom: 10px;
+        background: #abb1b8;
+    }
+</style>
+<script>
+$(document).ready(function(){
+    $("#myBtn").click(function(){
+        var idArr = [];
+        $(".box").each(function(){
+            idArr.push($(this).attr("id"));
+        });
+        
+        // Join array elements and display in alert
+        alert(idArr.join(", "));
+        console.log(idArr);
+    });
+});
+</script>
+</head>
+<body>
+    <div class="box" id="boxOne">#boxOne</div>
+    <div class="box" id="boxTwo">#boxTwo</div>
+    <div class="box" id="boxThree">#boxThree</div>
+    <button type="button" id="myBtn">Show ID List</button>
+</body>
+</html>
