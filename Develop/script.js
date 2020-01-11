@@ -4,90 +4,68 @@ the currentDay field*/
     var pcdt = document.getElementById('currentDay');
     pcdt.textContent = cdt;
     var x = moment().format("hh:mm A");
-
+    let schs = JSON.parse(localStorage.getItem('sch')) || [];
 /*Appending index.html page time slots for time, user input field, and save button*/
     var ts = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 
     for (let i = 0; i < ts.length; i++) {
 
     $('#calendar').append(
-        '<li col-sm-12 col-md-12 col-lg-12 class = "row" id=TS' + ts[i] + '">'
+        '<li class = "col-sm-12 col-md-12 col-lg-12 list-group-item" id="TS' + ts[i] + '">'
         + moment().hour(ts[i]).minute(0).second(0).format('hh mm A') +
-        '<input type="text" id=txt' + ts[i] + ' col-sm-8 col-md-8 col-lg-9 class="flush"></input><button type="button" col-sm-2 col-md2 col-lg-1 ml-1 btn-dark id=btn'
+        '<input type="text" id=txt' + ts[i] + ' class = "col-sm-8 col-md-8 col-lg-9"></input><button type="button" col-sm-2 col-md2 col-lg-1 ml-1 btn-dark id=btn'
         + ts[i] + ' class="saveBtn">Save</button></li>')
     }
 //Color coding past, present, future
-    const listItems = document.getElementsByTagName("li");
+/*$("#calendar").on("click",".saveBtn",function) - evaluation of different 
+way to process the button... would still a function to 
+reference the button id to populate only one object
+*/
 
-    $(document).ready(function() {
-    for (let i=0; i < listItems.length; i++){
-        document.getElementsByTagName("li")[i].setAttribute("value", ts[i]);
-    }
-    });
-
-    var m = parseInt(moment().format('k'));
-
-    /// this is not working... need to find out how to loop and perform if/else
-/*     $(document).ready(function() {
-        for (let i=0; i < listItems.length; i++){
-            y = (parseInt(listItems[i].value));
-            if (y < m) {
-                document.getElementsByTagName("li")[0].setAttribute("class", "past");
-                document.getElementsByTagName("li")[1].setAttribute("class", "past");
-                document.getElementsByTagName("li")[2].setAttribute("class", "past");
-                document.getElementsByTagName("li")[3].setAttribute("class", "past");
-                document.getElementsByTagName("li")[4].setAttribute("class", "past");
-                document.getElementsByTagName("li")[5].setAttribute("class", "past");
-                document.getElementsByTagName("li")[6].setAttribute("class", "past");
-                document.getElementsByTagName("li")[7].setAttribute("class", "past");
-                document.getElementsByTagName("li")[8].setAttribute("class", "past");
-            }
-            else if (y == m){
-                document.getElementsByTagName("li")[0].setAttribute("class", "present");
-                document.getElementsByTagName("li")[1].setAttribute("class", "present");
-                document.getElementsByTagName("li")[2].setAttribute("class", "present");
-                document.getElementsByTagName("li")[3].setAttribute("class", "present");
-                document.getElementsByTagName("li")[4].setAttribute("class", "present");
-                document.getElementsByTagName("li")[5].setAttribute("class", "present");
-                document.getElementsByTagName("li")[6].setAttribute("class", "present");
-                document.getElementsByTagName("li")[7].setAttribute("class", "present");
-                document.getElementsByTagName("li")[8].setAttribute("class", "present");
-            }else (y > m);{
-                document.getElementsByTagName("li")[0].setAttribute("class", "future");
-                document.getElementsByTagName("li")[1].setAttribute("class", "future");
-                document.getElementsByTagName("li")[2].setAttribute("class", "future");
-                document.getElementsByTagName("li")[3].setAttribute("class", "future");
-                document.getElementsByTagName("li")[4].setAttribute("class", "future");
-                document.getElementsByTagName("li")[5].setAttribute("class", "future");
-                document.getElementsByTagName("li")[6].setAttribute("class", "future");
-                document.getElementsByTagName("li")[7].setAttribute("class", "future");
-                document.getElementsByTagName("li")[8].setAttribute("class", "future");
-            }
+function ColorUpdate(){
+    let mccafe=moment().hour();
+    console.log(ts.length, mccafe);
+    for (let i = 0; i < ts.length; i++) {
+        if (ts[i]==mccafe){
+        $("#TS"+ ts[i]).addClass("present");
         }
-    }); */
+        else if( ts[i]>mccafe){
+            $("#TS"+ ts[i]).addClass("future");
+        }
+        else {
+            $("#TS"+ ts[i]).addClass("past");
+        }
+    }
+}
+
+$(document).ready(function(){
+    ColorUpdate();
+    setInterval(ColorUpdate,60*1000); //1000ms = 1 second
+});
+
+var m = parseInt(moment().format('k'));
+
 
 /*Pulling and storing user input with local storage*/
 //Timeslot 9
-    $(document).ready(function() {
+     $(document).ready(function() {
 
         const litxt9 = document.querySelector("#txt9");
         const btn9Button = document.querySelector("#btn9");
 
     btn9Button.addEventListener("click", function(event) {
         event.preventDefault();  
-        //set array
+       //set array
         const lcl9 = {
             txt9: litxt9.value.trim(),
             txt9time: x,
         };
         // set new submission
-        console.log(lcl9);
         localStorage.setItem("lcl9", JSON.stringify(lcl9));
     });
         // get most recent submission
         const lastlcl9 = JSON.parse(localStorage.getItem("lcl9"));
         document.getElementById("txt9").value = lastlcl9.txt9;
-        console.log(lastlcl9);
     });
 //Timeslot 10
     $(document).ready(function() {
@@ -103,13 +81,11 @@ the currentDay field*/
             txt10time: x,
         };
         // set new submission
-        console.log(lcl10);
         localStorage.setItem("lcl10", JSON.stringify(lcl10));
     });
         // get most recent submission
         const lastlcl10 = JSON.parse(localStorage.getItem("lcl10"));
         document.getElementById("txt10").value = lastlcl10.txt10;
-        console.log(lastlcl10);
     });
 //Timeslot 11
     $(document).ready(function() {
@@ -125,13 +101,11 @@ the currentDay field*/
             txt11time: x,
         };
         // set new submission
-        console.log(lcl11);
         localStorage.setItem("lcl11", JSON.stringify(lcl11));
     });
         // get most recent submission
         const lastlcl11 = JSON.parse(localStorage.getItem("lcl11"));
         document.getElementById("txt11").value = lastlcl11.txt11;
-        console.log(lastlcl11);
     });
 //Timeslot 12
 $(document).ready(function() {
@@ -147,13 +121,11 @@ btn12Button.addEventListener("click", function(event) {
         txt12time: x,
     };
     // set new submission
-    console.log(lcl12);
     localStorage.setItem("lcl12", JSON.stringify(lcl12));
 });
     // get most recent submission
     const lastlcl12 = JSON.parse(localStorage.getItem("lcl12"));
     document.getElementById("txt12").value = lastlcl12.txt12;
-    console.log(lastlcl12);
 });
 //Timeslot 13
 $(document).ready(function() {
@@ -169,13 +141,11 @@ btn13Button.addEventListener("click", function(event) {
         txt13time: x,
     };
     // set new submission
-    console.log(lcl13);
     localStorage.setItem("lcl13", JSON.stringify(lcl13));
 });
     // get most recent submission
     const lastlcl13 = JSON.parse(localStorage.getItem("lcl13"));
     document.getElementById("txt13").value = lastlcl13.txt13;
-    console.log(lastlcl13);
 });
 //Timeslot 14
 $(document).ready(function() {
@@ -191,13 +161,11 @@ btn14Button.addEventListener("click", function(event) {
         txt14time: x,
     };
     // set new submission
-    console.log(lcl14);
     localStorage.setItem("lcl14", JSON.stringify(lcl14));
 });
     // get most recent submission
     const lastlcl14 = JSON.parse(localStorage.getItem("lcl14"));
     document.getElementById("txt14").value = lastlcl14.txt14;
-    console.log(lastlcl14);
 });
 //Timeslot 11
 $(document).ready(function() {
@@ -213,13 +181,11 @@ btn11Button.addEventListener("click", function(event) {
         txt11time: x,
     };
     // set new submission
-    console.log(lcl11);
     localStorage.setItem("lcl11", JSON.stringify(lcl11));
 });
     // get most recent submission
     const lastlcl11 = JSON.parse(localStorage.getItem("lcl11"));
     document.getElementById("txt11").value = lastlcl11.txt11;
-    console.log(lastlcl11);
 });
 //Timeslot 15
 $(document).ready(function() {
@@ -235,13 +201,11 @@ btn15Button.addEventListener("click", function(event) {
         txt15time: x,
     };
     // set new submission
-    console.log(lcl15);
     localStorage.setItem("lcl15", JSON.stringify(lcl15));
 });
     // get most recent submission
     const lastlcl15 = JSON.parse(localStorage.getItem("lcl15"));
     document.getElementById("txt15").value = lastlcl15.txt15;
-    console.log(lastlcl15);
 });
 //Timeslot 16
 $(document).ready(function() {
@@ -257,13 +221,11 @@ btn16Button.addEventListener("click", function(event) {
         txt16time: x,
     };
     // set new submission
-    console.log(lcl16);
     localStorage.setItem("lcl16", JSON.stringify(lcl16));
 });
     // get most recent submission
     const lastlcl16 = JSON.parse(localStorage.getItem("lcl16"));
     document.getElementById("txt16").value = lastlcl16.txt16;
-    console.log(lastlcl16);
 });
 //Timeslot 17
 $(document).ready(function() {
@@ -279,19 +241,9 @@ btn17Button.addEventListener("click", function(event) {
         txt17time: x,
     };
     // set new submission
-    console.log(lcl17);
     localStorage.setItem("lcl17", JSON.stringify(lcl17));
 });
     // get most recent submission
     const lastlcl17 = JSON.parse(localStorage.getItem("lcl17"));
     document.getElementById("txt17").value = lastlcl17.txt17;
-    console.log(lastlcl17);
 });
-/*Psuedo coding
-    3 - set the color of the class
-
-/* Create a simple calendar application that allows the user to save events for each hour of the day. 
-This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
-
-Additionally, each hour should be color coded to reflect whether the time slot 
-is in the past, the present, or the future. This will change depending on the time of day. */
