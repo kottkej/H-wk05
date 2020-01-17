@@ -24,7 +24,6 @@ reference the button id to populate only one object
 
 function ColorUpdate(){
     let mccafe=moment().hour();
-    console.log(ts.length, mccafe);
     for (let i = 0; i < ts.length; i++) {
         if (ts[i]==mccafe){
         $("#TS"+ ts[i]).addClass("present");
